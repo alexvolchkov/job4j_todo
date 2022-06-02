@@ -45,23 +45,19 @@ public class ItemController {
 
     @GetMapping("/formItem/{itemId}")
     public String formItem(Model model, @PathVariable("itemId") int id) {
-        model.addAttribute("item", itemService.findById(id).get());
+        model.addAttribute("item", itemService.findById(id).orElse(new Item()));
         return "formItem";
     }
 
-    @GetMapping("/done")
-    public String done(@ModelAttribute Item item) {
-        itemService.findById(item.getId()).ifPresent(el -> {
-            el.setDone(true);
-            System.out.println(el);
-            itemService.update(el);
-        });
+    @GetMapping("/done/{itemId}")
+    public String done(@PathVariable("itemId") int id) {
+        itemService.done(id);
         return "redirect:/index";
     }
 
-    @GetMapping("/formUpdate")
-    public String formUpdate(Model model, @ModelAttribute Item item) {
-        itemService.findById(item.getId()).ifPresent(el -> model.addAttribute("item", el));
+    @GetMapping("/formUpdate/{itemId}")
+    public String formUpdate(Model model, @PathVariable("itemId") int id) {
+        model.addAttribute(itemService.findById(id).orElse(new Item()));
         return "update";
     }
 
@@ -71,9 +67,9 @@ public class ItemController {
         return "redirect:/index";
     }
 
-    @GetMapping("/formDelete")
-    public String formDelete(@ModelAttribute Item item) {
-        itemService.delete(item.getId());
+    @GetMapping("/formDelete/{itemId}")
+    public String formDelete(@PathVariable("itemId") int id) {
+        itemService.delete(id);
         return "redirect:/index";
     }
 }

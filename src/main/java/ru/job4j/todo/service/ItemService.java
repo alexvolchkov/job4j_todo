@@ -44,4 +44,9 @@ public class ItemService implements IItemService {
     public boolean delete(int id) {
         return store.delete(id);
     }
+
+    @Override
+    public void done(int id) {
+        store.done(id);
+    }
 }

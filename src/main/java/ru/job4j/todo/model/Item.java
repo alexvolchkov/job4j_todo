@@ -12,17 +12,9 @@ public class Item {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @Column(name = "name")
     private String name;
-
-    @Column(name = "description")
     private String description;
-
-    @Column(name = "created")
     private LocalDateTime created = LocalDateTime.now();
-
-    @Column(name = "done")
     private boolean done;
 
     public Item() {

@@ -36,8 +36,7 @@
                 Заявка
             </div>
             <div class="card-body">
-                <form th:action="@{/done}" method="get">
-                    <input type="hidden" name="id" th:value="${item.id}">
+                <form th:action="@{|/done/${item.id}|}" method="get" >
                     <table class="table">
                         <thead>
                         <tr>
@@ -58,8 +57,8 @@
                     </table>
 
                     <button type="submit" class="btn btn-primary">Выполнено</button>
-                    <button type="submit" name="action" value="formUpdate" th:formaction="@{/formUpdate}">Редактировать</button>
-                    <button type="submit" name="action" value="formDelete" th:formaction="@{/formDelete}">Удалить</button>
+                    <button type="submit" name="action" value="formUpdate" th:formaction="@{|/formUpdate/${item.id}|}">Редактировать</button>
+                    <button type="submit" name="action" value="formDelete" th:formaction="@{|/formDelete/${item.id}|}">Удалить</button>
                 </form>
             </div>
         </div>

@@ -18,4 +18,6 @@ public interface IItemService {
     Optional<Item> findById(int id);
 
     boolean delete(int id);
+
+    void done(int id);
 }

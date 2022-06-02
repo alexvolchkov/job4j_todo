@@ -95,4 +95,12 @@ public class ItemDbStore implements ItemStore {
             return count != 0;
         });
     }
+
+    @Override
+    public void done(int id) {
+        tx(session ->
+                session.createQuery("update Item set done = true where id = :fId")
+                        .setParameter("fId", id)
+                        .executeUpdate());
+    }
 }
