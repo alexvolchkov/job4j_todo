@@ -3,6 +3,7 @@ package ru.job4j.todo.service;
 import ru.job4j.todo.model.Item;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IItemService {
 
@@ -12,7 +13,9 @@ public interface IItemService {
 
     List<Item> findAll();
 
-    Item findById(int id);
+    List<Item> findAll(boolean done);
+
+    Optional<Item> findById(int id);
 
     boolean delete(int id);
 }

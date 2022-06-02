@@ -5,6 +5,7 @@ import ru.job4j.todo.model.Item;
 import ru.job4j.todo.store.ItemStore;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ItemService implements IItemService {
@@ -16,12 +17,12 @@ public class ItemService implements IItemService {
 
     @Override
     public Item add(Item item) {
-        return null;
+        return store.add(item);
     }
 
     @Override
     public boolean update(Item item) {
-        return false;
+        return store.update(item);
     }
 
     @Override
@@ -30,12 +31,17 @@ public class ItemService implements IItemService {
     }
 
     @Override
-    public Item findById(int id) {
-        return null;
+    public List<Item> findAll(boolean done) {
+        return store.findAll(done);
+    }
+
+    @Override
+    public Optional<Item> findById(int id) {
+        return store.findById(id);
     }
 
     @Override
     public boolean delete(int id) {
-        return false;
+        return store.delete(id);
     }
 }
