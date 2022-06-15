@@ -18,13 +18,14 @@
 <body>
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Задача</a>
+        <a class="navbar-brand" href="#">Список задач</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="/index">Главная <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link active" href="#">Главная <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" th:href="@{/formAddItem}">Добавить задание</a>
                 <a class="nav-item nav-link" th:href="@{/users}">Пользователи</a>
                 <a class="nav-item nav-link" th:href="@{/formAddUser}">Добавить пользователя</a>
                 <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/loginPage}">
@@ -40,24 +41,13 @@
     </nav>
 
 
-    <div class="row">
+    <div class="row pt-3">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Новая заявка
+                Ошибка создания пользователя.
             </div>
             <div class="card-body">
-                <form th:action="@{/createItem}" method="post">
-                    <input type="hidden" name="id" value="0">
-                    <div class="form-group">
-                        <label for="name">Имя</label>
-                        <input type="text" class="form-control" name="name" id="name">
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Описание</label>
-                        <input type="text" class="form-control" name="description" id="description">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Сохранить</button>
-                </form>
+                Пользователь с таким именем уже существует
             </div>
         </div>
     </div>

@@ -3,5 +3,12 @@ CREATE TABLE if not exists items (
   name VARCHAR,
   description VARCHAR,
   created TIMESTAMP,
-  done BOOLEAN
+  done BOOLEAN,
+  user_id int not null references users(id)
+);
+
+CREATE TABLE if not exists users (
+  id SERIAL PRIMARY KEY,
+  name TEXT unique,
+  password TEXT
 );

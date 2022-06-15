@@ -4,7 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.todo.model.Item;
+import ru.job4j.todo.model.User;
 import ru.job4j.todo.service.IItemService;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class ItemController {
@@ -15,8 +18,9 @@ public class ItemController {
     }
 
     @GetMapping("/index")
-    public String index(Model model) {
+    public String index(Model model, HttpSession session) {
         model.addAttribute("items", itemService.findAll());
+        model.addAttribute("user", getUserFromSession(session));
         return "index";
     }
 
@@ -33,12 +37,20 @@ public class ItemController {
     }
 
     @GetMapping("/formAddItem")
-    public String addItem(Model model) {
-        return "addItem";
+    public String addItem(Model model, HttpSession session) {
+        User user = getUserFromSession(session);
+        model.addAttribute("user", getUserFromSession(session));
+        if (isValid(user)) {
+            return "addItem";
+        } else {
+            return "redirect:/loginPage";
+        }
     }
 
     @PostMapping("/createItem")
-    public String createItem(@ModelAttribute Item item) {
+    public String createItem(@ModelAttribute Item item, HttpSession session) {
+        User user = getUserFromSession(session);
+        item.setUser(user);
         itemService.add(item);
         return "redirect:/index";
     }
@@ -71,5 +83,18 @@ public class ItemController {
     public String formDelete(@PathVariable("itemId") int id) {
         itemService.delete(id);
         return "redirect:/index";
+    }
+
+    private User getUserFromSession(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = new User();
+            user.setName("Гость");
+        }
+        return user;
+    }
+
+    private boolean isValid(User user) {
+        return !"Гость".equals(user.getName());
     }
 }

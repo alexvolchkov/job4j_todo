@@ -26,6 +26,16 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="#">Главная <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" th:href="@{/formAddItem}">Добавить задание</a>
+                <a class="nav-item nav-link" th:href="@{/users}">Пользователи</a>
+                <a class="nav-item nav-link" th:href="@{/formAddUser}">Добавить пользователя</a>
+                <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/loginPage}">
+                    <span th:text="${user.name}"></span>
+                    <span> | Войти</span>
+                </a>
+                <a class="nav-item nav-link" th:if="${user.name != 'Гость'}" th:href="@{/logout}">
+                    <span th:text="${user.name}"></span>
+                    <span> | Выйти</span>
+                </a>
             </div>
         </div>
     </nav>
@@ -47,6 +57,7 @@
                 <th scope="col">Имя</th>
                 <th scope="col">Дата создания</th>
                 <th scope="col">Состояние</th>
+                <th scope="col">Автор</th>
             </tr>
             </thead>
             <tbody>
@@ -57,6 +68,7 @@
                 </td>
                 <td th:text="${item.created}"/>
                 <td th:text="${item.done}"/>
+                <td th:text="${item.user.name}"/>
             </tr>
             </tbody>
         </table>

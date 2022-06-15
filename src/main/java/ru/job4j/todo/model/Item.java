@@ -16,6 +16,9 @@ public class Item {
     private String description;
     private LocalDateTime created = LocalDateTime.now();
     private boolean done;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Item() {
     }
@@ -25,11 +28,12 @@ public class Item {
         this.description = description;
     }
 
-    public Item(String name, String description, LocalDateTime created, boolean done) {
+    public Item(String name, String description, LocalDateTime created, boolean done, User user) {
         this.name = name;
         this.description = description;
         this.created = created;
         this.done = done;
+        this.user = user;
     }
 
     public int getId() {
@@ -70,6 +74,14 @@ public class Item {
 
     public void setDone(boolean done) {
         this.done = done;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
