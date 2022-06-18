@@ -60,13 +60,6 @@ public class UserDbStore implements UserStore {
     }
 
     @Override
-    public Optional<User> findById(int id) {
-        return CommonMetods.tx(
-                session -> Optional.ofNullable(session.get(User.class, id)),
-        sf);
-    }
-
-    @Override
     public boolean delete(int id) {
         return CommonMetods.tx(
                 session -> {
@@ -84,6 +77,6 @@ public class UserDbStore implements UserStore {
             session.createQuery("from User where name = :fName and password = :fPassword", User.class)
                     .setParameter("fName", name)
                     .setParameter("fPassword", password)
-                    .list().stream().findFirst(), sf);
+                    .uniqueResultOptional(), sf);
     }
 }

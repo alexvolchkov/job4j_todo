@@ -40,11 +40,7 @@ public class ItemController {
     public String addItem(Model model, HttpSession session) {
         User user = getUserFromSession(session);
         model.addAttribute("user", getUserFromSession(session));
-        if (isValid(user)) {
-            return "addItem";
-        } else {
-            return "redirect:/loginPage";
-        }
+        return "addItem";
     }
 
     @PostMapping("/createItem")
@@ -92,9 +88,5 @@ public class ItemController {
             user.setName("Гость");
         }
         return user;
-    }
-
-    private boolean isValid(User user) {
-        return !"Гость".equals(user.getName());
     }
 }

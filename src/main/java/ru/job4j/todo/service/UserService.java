@@ -36,11 +36,6 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Optional<User> findById(int id) {
-        return store.findById(id);
-    }
-
-    @Override
     public boolean delete(int id) {
         return store.delete(id);
     }

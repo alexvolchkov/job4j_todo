@@ -15,8 +15,6 @@ public interface UserStore {
 
     List<User> findAll();
 
-    Optional<User> findById(int id);
-
     boolean delete(int id);
 
     Optional<User> findUserByNameAndPwd(String name, String password);
