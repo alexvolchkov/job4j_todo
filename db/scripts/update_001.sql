@@ -6,7 +6,7 @@ CREATE TABLE if not exists users (
 
 CREATE TABLE if not exists items (
   id SERIAL PRIMARY KEY,
-  name VARCHAR,
+  name TEXT,
   description VARCHAR,
   created TIMESTAMP,
   done BOOLEAN,
