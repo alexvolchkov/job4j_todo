@@ -1,7 +1,7 @@
 CREATE TABLE if not exists users (
   id SERIAL PRIMARY KEY,
   name VARCHAR unique,
-  password TEXT
+  password VARCHAR
 );
 
 CREATE TABLE if not exists items (
