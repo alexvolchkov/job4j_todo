@@ -1,12 +1,12 @@
 CREATE TABLE if not exists users (
   id SERIAL PRIMARY KEY,
-  name TEXT unique,
+  name VARCHAR unique,
   password TEXT
 );
 
 CREATE TABLE if not exists items (
   id SERIAL PRIMARY KEY,
-  name TEXT,
+  name VARCHAR,
   description VARCHAR,
   created TIMESTAMP,
   done BOOLEAN,
