@@ -3,7 +3,9 @@ package ru.job4j.todo.store;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import ru.job4j.todo.model.User;
 
+import javax.servlet.http.HttpSession;
 import java.util.function.Function;
 
 public class CommonMetods {
@@ -20,5 +22,14 @@ public class CommonMetods {
         } finally {
             session.close();
         }
+    }
+
+    public static User getUserFromSession(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = new User();
+            user.setName("Гость");
+        }
+        return user;
     }
 }

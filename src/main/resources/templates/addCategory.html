@@ -18,14 +18,13 @@
 <body>
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Список задач</a>
+        <a class="navbar-brand" href="#">Задача</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="#">Главная <span class="sr-only">(current)</span></a>
-                <a class="nav-item nav-link" th:href="@{/formAddItem}">Добавить задание</a>
+                <a class="nav-item nav-link active" href="/index">Главная <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" th:href="@{/users}">Пользователи</a>
                 <a class="nav-item nav-link" th:href="@{/formAddUser}">Добавить пользователя</a>
                 <a class="nav-item nav-link" th:href="@{/categories}">Категории задач</a>
@@ -43,36 +42,21 @@
 
 
     <div class="row">
-
-        <form action="#" th:action="@{/index}" method="get">
-            <button type="submit" name="action" value="allItems">Все заявки</button>
-            <button type="submit" name="action" value="newItems" th:formaction="@{/newItems}">Новые заявки</button>
-            <button type="submit" name="action" value="closeItems" th:formaction="@{/closeItems}">Закрытые заявки</button>
-        </form>
-
-
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Имя</th>
-                <th scope="col">Дата создания</th>
-                <th scope="col">Состояние</th>
-                <th scope="col">Автор</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="item: ${items}">
-                <td th:text="${item.id}"/>
-                <td>
-                    <a th:href="@{|/formItem/${item.id}|}" th:text="${item.name}" target="_blank"></a>
-                </td>
-                <td th:text="${item.created}"/>
-                <td th:text="${item.done}"/>
-                <td th:text="${item.user.name}"/>
-            </tr>
-            </tbody>
-        </table>
+        <div class="card" style="width: 100%">
+            <div class="card-header">
+                Новая категория
+            </div>
+            <div class="card-body">
+                <form th:action="@{/createCategory}" method="post">
+                    <input type="hidden" name="id" value="0">
+                    <div class="form-group">
+                        <label for="name">Имя</label>
+                        <input type="text" class="form-control" name="name" id="name">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 </body>

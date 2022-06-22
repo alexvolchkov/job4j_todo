@@ -13,7 +13,7 @@
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<title>Список задач</title>
+<title>Категории задач</title>
 </head>
 <body>
 <div class="container">
@@ -29,6 +29,7 @@
                 <a class="nav-item nav-link" th:href="@{/users}">Пользователи</a>
                 <a class="nav-item nav-link" th:href="@{/formAddUser}">Добавить пользователя</a>
                 <a class="nav-item nav-link" th:href="@{/categories}">Категории задач</a>
+                <a class="nav-item nav-link" th:href="@{/formAddCategory}">Добавить категорию</a>
                 <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/loginPage}">
                     <span th:text="${user.name}"></span>
                     <span> | Войти</span>
@@ -43,33 +44,17 @@
 
 
     <div class="row">
-
-        <form action="#" th:action="@{/index}" method="get">
-            <button type="submit" name="action" value="allItems">Все заявки</button>
-            <button type="submit" name="action" value="newItems" th:formaction="@{/newItems}">Новые заявки</button>
-            <button type="submit" name="action" value="closeItems" th:formaction="@{/closeItems}">Закрытые заявки</button>
-        </form>
-
-
         <table class="table">
             <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Имя</th>
-                <th scope="col">Дата создания</th>
-                <th scope="col">Состояние</th>
-                <th scope="col">Автор</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="item: ${items}">
-                <td th:text="${item.id}"/>
-                <td>
-                    <a th:href="@{|/formItem/${item.id}|}" th:text="${item.name}" target="_blank"></a>
-                </td>
-                <td th:text="${item.created}"/>
-                <td th:text="${item.done}"/>
-                <td th:text="${item.user.name}"/>
+            <tr th:each="category: ${categories}">
+                <td th:text="${category.id}"/>
+                <td th:text="${category.name}"/>
             </tr>
             </tbody>
         </table>
